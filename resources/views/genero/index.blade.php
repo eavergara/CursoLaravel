@@ -1,15 +1,20 @@
 @extends('layouts.admin')
-    @section('content')
-        <table class="table">
-            <thead>
-                <th>Nombre</th>
-                <th>Opciones</th>
-            </thead>
-            <tbody id="datos"></tbody>
-        </table>
-        
-    @endsection
+	@section('content')
+	<div id="msj-success" class="alert alert-success alert-dismissible" role="alert" style="display:none">
+  		<strong> Genero Actualizado Correctamente.</strong>
+	</div>
+		<table class="table">
+			<thead>
+				<th>Nombre</th>
+				<th>Operaciones</th>
+			</thead>
 
-    @section('scripts')
-        {!!Html::script('js/script2.js')!!}
-    @endsection
+			<tbody id="datos"></tbody>
+		</table>
+
+		@include('genero.modal')
+	@endsection
+
+	@section('scripts')
+		{!!Html::script('js/script2.js')!!}
+	@endsection
