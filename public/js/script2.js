@@ -9,8 +9,24 @@ function Carga(){
   $("#datos").empty();
   $.get(route, function(res){
       $(res).each(function(key,value){
-          tablaDatos.append("<tr><td>"+value.genre+"</td><td><button value="+value.id+" OnClick='Mostrar(this);' class='btn btn-primary' data-toggle='modal' data-target='#myModal'>Editar</button>  <button class='btn btn-danger'>Eliminar</button></td></tr>");
+          tablaDatos.append("<tr><td>"+value.genre+"</td><td><button value="+value.id+" OnClick='Mostrar(this);' class='btn btn-primary' data-toggle='modal' data-target='#myModal'>Editar</button>  <button  value="+value.id+" OnClick='Eliminar(this);' class='btn btn-danger'>Eliminar</button></td></tr>");
       });
+  });
+}
+
+function Eliminar(btn){
+  var route = "http://localhost:8000/genero/"+btn.value+"";
+  var token =$("#token").val();
+
+  $.ajax({
+      url: route,
+      headers: {'X-CSRF-TOKEN': token},
+      type: 'DELETE',
+      dataType: 'json',
+      success: function(){
+        Carga();
+        $("#msj-danger").fadeIn();
+      }
   });
 }
 
