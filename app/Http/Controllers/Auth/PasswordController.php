@@ -4,6 +4,7 @@ use Cinema\Http\Controllers\Controller;
 use Illuminate\Contracts\Auth\Guard;
 use Illuminate\Contracts\Auth\PasswordBroker;
 use Illuminate\Foundation\Auth\ResetsPasswords;
+use Auth;
 
 class PasswordController extends Controller {
 
@@ -34,5 +35,12 @@ class PasswordController extends Controller {
 
 		$this->middleware('guest');
 	}
+
+	protected $redirectTo = 'admin';
+    protected function resetPassword($user, $password){
+        $user->password = $password;
+        $user->save();
+        Auth::login($user);
+    }
 
 }
